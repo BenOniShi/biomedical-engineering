@@ -1,12 +1,11 @@
 package com.cdmu.controller;
 
 import com.cdmu.utils.ResultInfoUtil;
-import com.cdmu.model.ResultInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @Author: BenOnSHI
@@ -20,9 +19,10 @@ public class IndexController {
 
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    @ResponseBody
-    public ResultInfo info() {
-        return resultInfoUtil.success("成功");
+    public ModelAndView info() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("index");
+        return modelAndView;
     }
 
 }
