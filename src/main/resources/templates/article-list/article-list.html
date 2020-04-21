@@ -1,25 +1,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:include="/common-view/head"></head>
+<head th:include="common-view/head"></head>
 <body>
-
-<div th:include="/common-view/header"></div>
-
-<div th:include="/common-view/nav"></div>
-
+<div th:include="common-view/header"></div>
+<div th:include="common-view/nav"></div>
 <script src="/static/js/cg.autoNav.js"></script>
+<script src="/static/js/nav.cg-nav.js"></script>
 
-<script type='text/javascript'>
-    $(".nav .cg-nav").autoNav();
-    jQuery(function ($) {
-        $("#login_click").click(function () {
-            var lg = $("#login_box");
-            lg.fadeIn(500);
-        });
-        $("#close_top").click(function () {
-            $(this).parents("#login_box").fadeOut(500);
-        });
-    });
-</script>
 
 <div class="content width_1000">
     <div class="main">
@@ -68,6 +54,6 @@
     <div class="clear"></div>
 </div>
 
-<div th:include="/common-view/footer"></div>
+<div th:include="common-view/footer"></div>
 </body>
 </html>

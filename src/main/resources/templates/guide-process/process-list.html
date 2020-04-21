@@ -1,31 +1,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:include="/common-view/head"></head>
+<head th:include="common-view/head"></head>
 <body>
-<div th:include="/common-view/header"></div>
-<div th:include="/common-view/nav"></div>
+<div th:include="common-view/header"></div>
+<div th:include="common-view/nav"></div>
 <script src="/static/js/cg.autoNav.js"></script>
-
-
-<script type='text/javascript'>
-
-    $(".nav .cg-nav").autoNav();
-
-    jQuery(function ($) {
-        $("#login_click").click(function () {
-            var lg = $("#login_box");
-            lg.fadeIn(500);
-        });
-        $("#close_top").click(function () {
-            $(this).parents("#login_box").fadeOut(500);
-        });
-    });
-
-</script>
+<script src="/static/js/nav.cg-nav.js"></script>
 
 
 <div class="content width_1000 clearfix">
 
-    <div th:include="/common-view/list-left.html"></div>
+    <div class="list-left fl">
+        <div class="catalogBox">
+
+            <div th:include="common-view/list-left"></div>
+        </div>
+    </div>
+    <script src="/static/js/catalogList.li.js"></script>
 
     <div class="list-right fr">
         <div class="cg-position">
@@ -131,6 +121,6 @@
 </div>
 
 
-<div th:include="/common-view/footer"></div>
+<div th:include="common-view/footer"></div>
 </body>
 </html>
