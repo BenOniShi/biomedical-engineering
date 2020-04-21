@@ -118,7 +118,7 @@ table {
 .title {
 	height: 31px;
 	background:#f9f3e5;
-	border-bottom:2px solid #db6111;
+	border-bottom:2px solid #cd1212;
 	line-height: 31px;
 	padding:0 12px;
 }
@@ -479,7 +479,7 @@ table {
 	color:#51ce47;
 }
 .red {
-	color:#f14112;
+	color: #f14112;
 }
 .gray {
 	color:#9e9e9e;

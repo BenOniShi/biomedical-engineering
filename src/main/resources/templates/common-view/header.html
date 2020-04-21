@@ -1,0 +1,25 @@
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<div class="header" th:fragment="header">
+    <div class="head width_1000">
+        <div class="logo fl">
+            <a href="/index" title="">
+                <img src="/static/images/logo.png"/>
+            </a>
+        </div>
+        <div class="fr">
+            <div class="search">
+                <form action="">
+                    <input type="text" value="请输入关键字" class="searchText"
+                           onfocus="if(this.value=='请输入关键字'){this.value=''}"
+                           onblur="if(this.value==''){this.value='请输入关键字'}"
+                    >
+                    <input type="submit" class="searchBtn" value=""/>
+                </form>
+            </div>
+            <div class="kyxlbtn">
+                <button onclick="javascrtpt:window.location.href='/kyxl/login_preSearchkyxl.action'">科研项目、竞赛获奖检索
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

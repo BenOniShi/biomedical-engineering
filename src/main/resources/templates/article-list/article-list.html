@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="/common-view/head"></head>
+<body>
+
+<div th:include="/common-view/header"></div>
+
+<div th:include="/common-view/nav"></div>
+
+<script src="/static/js/cg.autoNav.js"></script>
+
+<script type='text/javascript'>
+    $(".nav .cg-nav").autoNav();
+    jQuery(function ($) {
+        $("#login_click").click(function () {
+            var lg = $("#login_box");
+            lg.fadeIn(500);
+        });
+        $("#close_top").click(function () {
+            $(this).parents("#login_box").fadeOut(500);
+        });
+    });
+</script>
+
+<div class="content width_1000">
+    <div class="main">
+        <div class="main_right">
+            <div class="tzgg" style="min-height:700px;">
+                <table width="95%" style="table-layout: fixed; word-wrap: break-word;"
+                       border="0" align="center" cellpadding="4" cellspacing="0"
+                       class="main_tbbg" id="datatable">
+                    <tr bgcolor="#FFFFFF">
+                        <td align="center">
+                            <div style="padding: 10px 0px">
+                                <font size="5" style="font-weight: bolder;color:#FF7D57">关于公示浙江大学2020年本科生国家级、省级、校级创新创业训练计划项目名单的通知</font>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr bgcolor="#FFFFFF">
+                        <td align="center">
+                            <div style="border:1px dotted #ccc;padding: 5px">
+                                编辑：管理员&nbsp;&nbsp;日期：2020-04-17 16:55:17&nbsp;&nbsp;点击数：206
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr bgcolor="#FFFFFF">
+                        <td>
+                            <strong><span style="font-family: 楷体_GB2312;"><span
+                                    style="font-size: large;">各学院（系）、有关部门：<br/>
+</span></span></strong><span style="font-family: 楷体_GB2312;"><span style="font-size: large;"><br/>
+&nbsp; &nbsp; <bdo dir="ltr">根据教育部《关于报送2019年国家级大学生创新创业训练计划立项项目的通知》（教高司函〔2019〕8号）精神、浙江省大学生科技创新活动计划（新苗人才计划）实施办公室《关于开展浙江省大学生科技创新活动计划（新苗人才计划）2018年度项目结题验收和2020年度项目申报的通知》、我校《关于组织开展2020年国家、省、学校、学院四级大学生创新创业训练计划项目申报的通知》的要求，经学生本人申请，学院（系）、有关部门评审，项目主管部门审核等程序，现将项目名单予以公示，公示期4月17日至4月27日。若有异议，请发邮件至anqinying@zju.edu.cn，电话88206238。<br/>
+</bdo><br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;教务处<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2020年4月17日<br/>
+<br/>
+<a href="/kyxl/userfiles/file/附件1 浙江大学2020年国家级大学生创新创业训练计划项目名单（169项）(4).xls">附件1.浙江大学2020年国家级大学生创新创业训练计划项目名单（169项）</a><br/>
+<a href="/kyxl/userfiles/file/附件2 浙江大学2020年浙江省大学生科技创新活动计划（新苗人才计划）项目名单（190项）(5).xls">附件2.浙江大学2020年浙江省大学生科技创新活动计划（新苗人才计划）项目名单（190项）</a><br/>
+<a href="/kyxl/userfiles/file/附件3 浙江大学2020年大学生科研训练计划项目（校SRTP）名单（507项）(4).xls">附件3.浙江大学2020年大学生科研训练计划项目（校SRTP）名单（507项）</a><br/>
+<br type="_moz"/>
+</span></span><br/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div th:include="/common-view/footer"></div>
+</body>
+</html>

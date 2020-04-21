@@ -1,0 +1,152 @@
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<div class="list-left fl" th:fragment="list-left">
+    <div class="catalogBox">
+        <div>
+            <div class="fl pr16">
+                <div class="cjwt width_240">
+                    <div class="title">
+                        <h3>
+                            常见问题
+                        </h3>
+                        <a href="/kyxl/xtgg_tzlist.action?nav=cjwt&type=cjwt">
+                            <span>|</span> more</a>
+                    </div>
+                    <ul class="cg-news-list">
+
+
+                        <li>
+
+                            <a href="/kyxl/xtgg_getOne.action?ggid=801"
+                               class="art-heading">
+                                关于科研实践指导老师职级...
+                            </a>
+                            <span class="art-date">03-04</span>
+                        </li>
+
+
+                        <li>
+
+                            <a href="/kyxl/xtgg_getOne.action?ggid=802"
+                               class="art-heading">
+                                学校给予科研实践项目经费...
+                            </a>
+                            <span class="art-date">03-04</span>
+                        </li>
+
+
+                        <li>
+
+                            <a href="/kyxl/xtgg_getOne.action?ggid=800"
+                               class="art-heading">
+                                科研实践项目对参与学生资...
+                            </a>
+                            <span class="art-date">03-04</span>
+                        </li>
+
+
+                        <li>
+
+                            <a href="/kyxl/xtgg_getOne.action?ggid=799"
+                               class="art-heading">
+                                科研训练项目对参与学生资...
+                            </a>
+                            <span class="art-date">03-04</span>
+                        </li>
+
+
+                        <li>
+
+                            <a href="/kyxl/xtgg_getOne.action?ggid=612"
+                               class="art-heading">
+                                科教协同项目是什么级别、...
+                            </a>
+                            <span class="art-date">01-25</span>
+                        </li>
+
+
+                        <li>
+
+                            <a href="/kyxl/xtgg_getOne.action?ggid=311"
+                               class="art-heading">
+                                每位本科生必须做科研训练...
+                            </a>
+                            <span class="art-date">04-25</span>
+                        </li>
+
+
+                        <li>
+
+                            <a href="/kyxl/xtgg_getOne.action?ggid=312"
+                               class="art-heading">
+                                学生能1个人申报项目吗？...
+                            </a>
+                            <span class="art-date">04-25</span>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="xgwj  width_240">
+                    <div class="title">
+                        <h3>
+                            相关文件
+                        </h3>
+                        <a href="#">
+                            <span>|</span> more</a>
+                    </div>
+                    <ul class="cg-news-list">
+
+                        <li>
+                            <a href="/kyxl/xtgg_getOne.action?ggid=743"
+                               class="art-heading">
+                                浙大本发〔2018〕26号+浙江大学本科生学科竞赛...
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </div>
+
+                <div class="xglj  width_240"  style="margin-top: 30px">
+                    <div class="title">
+                        <h3>
+                            相关链接
+                        </h3>
+                        <a href="/kyxl/xtgg_tzlist.action?nav=xgwt&type=xgwj">
+                            <span>|</span> more</a>
+                    </div>
+                    <ul class="cg-news-list">
+
+                        <li>
+                            <a href="http://jwbinfosys.zju.edu.cn/">教务管理系统</a>
+                        </li>
+
+                        <li>
+                            <a href="http://bksy.zju.edu.cn/">本科生院</a>
+                        </li>
+
+                        <li>
+                            <a href="http://www.zjcontest.net/#/home">浙江省大学生科技竞赛网</a>
+                        </li>
+
+                        <li>
+                            <a href="http://www.zju.edu.cn/">浙江大学</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <script>
+        $(function() {
+            $(".catalogList li").children("a").click(function() {
+                $(this).next(".secondCatalog").toggle();
+                console.log("ok")
+                //return false;
+            })
+        })
+    </script>
+</div>
