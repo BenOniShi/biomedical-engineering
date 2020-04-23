@@ -20,7 +20,7 @@ public class NewsController {
      * @return
      */
     @RequestMapping(value = "{page}", method = RequestMethod.GET)
-    public ModelAndView page(@PathVariable String page, Integer cusId) {
+    public ModelAndView page(@PathVariable String page) {
         ModelAndView modelAndView = new ModelAndView();
         switch (page) {
             case "list":
