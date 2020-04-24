@@ -38,15 +38,15 @@ layui.use(['form'], function () {
             url: '/login/doLogin',
             type: 'post',
             data: {
-                'empName': data.username,
-                'empPwd': data.password
+                'userName': data.username,
+                'userPwd': data.password
             },
             dataType: 'json',
             success: function (data) {
                 if (data.code == 200) {
                     setTimeout(function () {
-                        window.location.href ="/index/main";
-                    },2000);
+                        window.location.href = "/index/index";
+                    }, 2000);
                     layer.msg('登录成功,正在前往首页');
                 } else {
                     //登陆失败

@@ -1,0 +1,16 @@
+#shiro的配置
+shiro:
+  hash-algorithm-name: md5
+  hash-iterations: 2
+  anon-urls:
+    - /index.html*
+    - /index/*
+    - /login/doLogin*
+    - /login*
+    - /resources/**
+    - /static/**
+    - /upload/**
+  login-url: /index/login
+  log-out-url: /login/logout*
+  authc-urls:
+    - /**

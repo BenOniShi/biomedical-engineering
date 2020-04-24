@@ -18,7 +18,7 @@ public class TaskExecutorConfig implements AsyncConfigurer {
 
     /**
      * @description: 实现AsyncConfigurer接口并重写getAsyncExecutor方法，
-     * 并返回一个ThreadPoolTaskExecutor，这样我们就获得了一个基于线程池TaskExecutor
+     * 并返回一个ThreadPoolTaskExecutorjj，这样我们就获得了一个基于线程池TaskExecutor
      * @param:
      * @return: java.util.concurrent.Executor
      * @author: benOnShi

@@ -1,41 +1,35 @@
 package com.cdmu.controller;
 
+import com.cdmu.pojo.vo.ModulesInfo;
 import com.cdmu.service.IModulesService;
-import com.cdmu.utils.ResultInfoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * @Author: BenOnSHI
- * @Date: 2020/4/19 11:36
- **/
+ * @author BenOniShi
+ * @date 2020/4/24 23:58
+ */
+@RequestMapping("/manager")
 @Controller
-@RequestMapping("/index")
-public class IndexController  {
-
+public class ManagerController extends BaseController {
 
     @Autowired
-    private ResultInfoUtil resultInfoUtil;
-    @Autowired
-    private IModulesService modulesServiceI;
-
+    private IModulesService modulesService;
 
     @RequestMapping(value = "/{page}", method = RequestMethod.GET)
     public ModelAndView page(@PathVariable String page) {
         ModelAndView modelAndView = new ModelAndView();
         switch (page) {
-            case "index":
-                modelAndView.setViewName("index");
-                break;
-            case "login":
-                modelAndView.setViewName("login");
-                break;
-            case "manager":
+            case "main":
                 modelAndView.setViewName("manager");
+                break;
+            case "index":
+                modelAndView.setViewName("manager-index");
                 break;
             default:
                 break;
@@ -45,6 +39,14 @@ public class IndexController  {
     }
 
 
-
-
+    /**
+     * 后台管理界面返回模块列表
+     *
+     * @return
+     */
+    @RequestMapping(value = "/managerModuleList", method = RequestMethod.GET)
+    @ResponseBody
+    public ModulesInfo managerModuleList() {
+        return modulesService.managerModuleList(super.role);
+    }
 }

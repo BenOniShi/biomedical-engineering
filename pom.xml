@@ -50,10 +50,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.session</groupId>
-            <artifactId>spring-session-data-redis</artifactId>
-        </dependency>
+
 
         <dependency>
             <groupId>mysql</groupId>
@@ -100,6 +97,10 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
         <!-- 权限框架 -->
         <dependency>
             <groupId>org.apache.shiro</groupId>

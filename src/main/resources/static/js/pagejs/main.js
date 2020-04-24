@@ -4,7 +4,7 @@ layui.use(['element', 'layer', 'layuimini'], function () {
         element = layui.element,
         layer = layui.layer;
 
-    layuimini.init("/index/managerModuleList");
+    layuimini.init("/manager/managerModuleList");
 
 
     $(".login-out").on("click", function () {
