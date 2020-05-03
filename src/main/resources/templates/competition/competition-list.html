@@ -1,0 +1,187 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="common-view/head"></head>
+<body>
+<div th:include="common-view/header"></div>
+<div th:include="common-view/nav"></div>
+<script src="/static/js/cg.autoNav.js"></script>
+<script src="/static/js/nav.cg-nav.js"></script>
+
+
+<div class="content width_1000 clearfix">
+
+    <div class="list-left fl">
+        <div class="catalogBox">
+
+            <div th:include="common-view/list-left"></div>
+        </div>
+    </div>
+    <script src="/static/js/catalogList.li.js"></script>
+
+
+    <div class="list-right fr">
+        <div class="cg-position">
+            当前位置：<a href="/index/index">首页</a> > <a href="" th:text="${title}" id="title"></a>
+        </div>
+        <div class="list-right-content new">
+            <script>
+                $(".xkjsBanner").cgPictureEffect({
+                    picture: ".big-pic",
+                    thumbPicture: ".small-pic",
+                    title: ".pic-title",
+                    effect: {
+                        speed: 2000,
+                        type: "fade"
+                    },
+                    thumbEffect: {
+                        style: "number",
+                        type: null,
+                        selectedClass: "small-hover"
+                    }
+                });
+            </script>
+            <div class="title" style="margin-top:10px;">
+                <h3>通知公告</h3>
+                <a href="/index/notice"> 更多 > </a>
+            </div>
+            <ul class="cg-news-list" id="tzgg">
+
+
+            </ul>
+            <div class="clearfix">
+                <div class="xjjs new fl">
+                    <div class="title">
+                        <h3>校级竞赛</h3>
+                        <a href="/xkjs/front/xjjs?jsjb=Q240Zlg4JUdvZjAx&type=Q240Zlh4JUdvZjAxampz&name=Q240Zlg4JUdvZjAx">
+                            更多 > </a>
+                    </div>
+                    <ul class="cg-news-list" id="xjjs">
+
+
+                    </ul>
+                </div>
+                <div class="xjjs new fr">
+                    <div class="title">
+                        <h3>省级竞赛</h3>
+                        <a href="/xkjs/front/sjjs?jsjb=Q240Zlg3JUdvZjAx&type=Q240ZlhzJUdvZjAxampz"> 更多 > </a>
+                    </div>
+                    <ul class="cg-news-list">
+
+
+                    </ul>
+                </div>
+                <div class="xjjs new fl">
+                    <div class="title">
+                        <h3>国家级竞赛</h3>
+                        <a href="/xkjs/front/gjjs?jsjb=Q240Zlg2JUdvZjAx&type=Q240ZlhnJUdvZjAxampz"> 更多 > </a>
+                    </div>
+                    <ul class="cg-news-list">
+
+
+                    </ul>
+                </div>
+                <div class="xjjs new fr">
+                    <div class="title">
+                        <h3>国际级竞赛</h3>
+                        <a href="/xkjs/front/zjjs?jsjb=Q240Zlg1JUdvZjAx&type=Q240Zlh6JUdvZjAxampz"> 更多 > </a>
+                    </div>
+                    <ul class="cg-news-list">
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div th:include="common-view/footer"></div>
+<script src="/static/js/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
+<script src="/static/js/lib/axios/axios.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+    axios({
+        method: 'get',
+        params: {
+            articleType: '常见问题',
+        },
+        url: '/index/queryArticleByType',
+    }).then(response => {
+        var res = response.data;
+        var pageInfo = res.data;
+        var result = pageInfo.list;
+        for (let i = 0; i < result.length; i++) {
+            var html = '<li>';
+            html += '<a href="/index/queryArticle?articleId=' + result[i].id + '"  class = "art-heading"> '
+            html += ' ' + result[i].articleTitle.substring(0, 10) + '.... ';
+            html += '</a>'
+            html += ' <span class= "art-date" >' + result[i].createDate + '</span>';
+            html += ' </li>'
+            $("#cjwt").append(html);
+        }
+    });
+
+    axios({
+        method: 'get',
+        params: {
+            articleType: '相关文件',
+        },
+        url: '/index/queryArticleByType',
+    }).then(response => {
+        var res = response.data;
+        var pageInfo = res.data;
+        var result = pageInfo.list;
+        for (let i = 0; i < result.length; i++) {
+            var html = '<li>';
+            html += '<a href="/index/queryArticle?articleId=' + result[i].id + '"  class = "art-heading"> '
+            html += ' ' + result[i].articleTitle + '';
+            html += '</a>'
+            html += ' </li>'
+            $("#xgwj").append(html);
+        }
+    });
+
+
+    axios({
+        method: 'get',
+        params: {
+            articleType: '通知公告',
+        },
+        url: '/index/queryArticleByType',
+    }).then(response => {
+        var res = response.data;
+        var pageInfo = res.data;
+        var result = pageInfo.list;
+        for (let i = 0; i < result.length; i++) {
+            var html = '<li>';
+            html += '<a href="/index/queryArticle?articleId=' + result[i].id + '"  class = "art-heading"> '
+            html += ' ' + result[i].articleTitle.substring(0, 40) + '.... ';
+            html += '</a>'
+            html += ' <span class= "art-date" >' + result[i].createDate + '</span>';
+            html += ' </li>'
+            $("#tzgg").append(html);
+        }
+    });
+
+
+    axios({
+        method: 'get',
+        params: {
+            matchType: '校级竞赛',
+        },
+        url: '/competition/queryMatchByType',
+    }).then(response => {
+        var res = response.data;
+        var pageInfo = res.data;
+        var result = pageInfo.list;
+        for (let i = 0; i < result.length; i++) {
+            var html = '<li>';
+            html += '<a href="/competition/queryMatch?matchId=' + result[i].id + ' " class="art-heading">' + result[i].matchName + '</a>'
+            html += '<span class="art-date sbz">' + result[i].matchState + '</span>'
+            html += ' </li>'
+            $("#xjjs").append(html);
+        }
+    });
+</script>
+</body>
+</html>

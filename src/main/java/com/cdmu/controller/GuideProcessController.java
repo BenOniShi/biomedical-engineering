@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * 指导流程
+ * 指南流程
  *
  * @Author: BenOnSHI
  * @Date: 2020/4/21 16:34

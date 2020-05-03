@@ -1,9 +1,13 @@
 package com.cdmu.controller;
 
+import com.cdmu.model.ResultInfo;
+import com.cdmu.pojo.Article;
+import com.cdmu.pojo.Match;
+import com.cdmu.service.IArticleService;
+import com.cdmu.utils.ResultInfoUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -16,6 +20,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ArticleController {
 
+    @Autowired
+    private IArticleService articleService;
+    @Autowired
+    private ResultInfoUtil resultInfoUtil;
+
     /**
      * @param page restful
      * @return
@@ -27,9 +36,47 @@ public class ArticleController {
             case "list":
                 modelAndView.setViewName("article-list/article-list");
                 break;
+            case "manager-list":
+                modelAndView.setViewName("article-list/article-manager-list");
+                break;
+            case "manager-add":
+                modelAndView.setViewName("article-list/article-manager-add");
+                break;
+
             default:
                 break;
         }
         return modelAndView;
     }
+
+
+
+    @RequestMapping(value = "queryArticleByParams/{articleAttributes}",method = RequestMethod.GET)
+    @ResponseBody
+    public ResultInfo queryArticleByParams(@RequestParam(defaultValue = "0") Integer page
+            , @RequestParam(defaultValue = "100") Integer limit, Article article,@PathVariable String articleAttributes){
+        return resultInfoUtil.success(articleService.queryArticleByParams(page,limit,article,articleAttributes));
+    }
+
+    /**
+     * 文章添加
+     *
+     * @param article 文章bean
+     * @return
+     */
+    @RequestMapping(value = "/addArticle", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultInfo addNews(Article article) {
+        articleService.addArticleByType(article);
+        return resultInfoUtil.success();
+    }
+
+    @RequestMapping(value = "/deleteArticle/{articleId}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResultInfo deleteArticleByArticleId(@PathVariable Integer articleId) {
+        articleService.deleteArticleByArticleId(articleId);
+        return resultInfoUtil.success();
+    }
+
+
 }

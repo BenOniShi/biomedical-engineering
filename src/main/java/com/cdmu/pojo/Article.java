@@ -1,5 +1,8 @@
 package com.cdmu.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,14 +12,18 @@ public class Article implements Serializable {
     private String articleType;
 
     private String articleTitle;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date createDate;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date updateDate;
 
     private String createMan;
 
     private String articleLink;
+
+    private String articleAttributes;
 
     private String articleText;
 
@@ -78,6 +85,14 @@ public class Article implements Serializable {
         this.articleLink = articleLink == null ? null : articleLink.trim();
     }
 
+    public String getArticleAttributes() {
+        return articleAttributes;
+    }
+
+    public void setArticleAttributes(String articleAttributes) {
+        this.articleAttributes = articleAttributes == null ? null : articleAttributes.trim();
+    }
+
     public String getArticleText() {
         return articleText;
     }
@@ -99,6 +114,7 @@ public class Article implements Serializable {
         sb.append(", updateDate=").append(updateDate);
         sb.append(", createMan=").append(createMan);
         sb.append(", articleLink=").append(articleLink);
+        sb.append(", articleAttributes=").append(articleAttributes);
         sb.append(", articleText=").append(articleText);
         sb.append("]");
         return sb.toString();

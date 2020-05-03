@@ -5,10 +5,11 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="article_type" jdbcType="VARCHAR" property="articleType" />
     <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
-    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="update_date" jdbcType="DATE" property="updateDate" />
     <result column="create_man" jdbcType="VARCHAR" property="createMan" />
     <result column="article_link" jdbcType="VARCHAR" property="articleLink" />
+    <result column="article_attributes" jdbcType="VARCHAR" property="articleAttributes" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.cdmu.pojo.Article">
     <result column="article_text" jdbcType="LONGVARCHAR" property="articleText" />
@@ -72,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, article_type, article_title, create_date, update_date, create_man, article_link
+    id, article_type, article_title, create_date, update_date, create_man, article_link, 
+    article_attributes
   </sql>
   <sql id="Blob_Column_List">
     article_text
@@ -131,10 +133,10 @@
     </selectKey>
     insert into t_article (article_type, article_title, create_date, 
       update_date, create_man, article_link, 
-      article_text)
-    values (#{articleType,jdbcType=VARCHAR}, #{articleTitle,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{updateDate,jdbcType=TIMESTAMP}, #{createMan,jdbcType=VARCHAR}, #{articleLink,jdbcType=VARCHAR}, 
-      #{articleText,jdbcType=LONGVARCHAR})
+      article_attributes, article_text)
+    values (#{articleType,jdbcType=VARCHAR}, #{articleTitle,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}, 
+      #{updateDate,jdbcType=DATE}, #{createMan,jdbcType=VARCHAR}, #{articleLink,jdbcType=VARCHAR}, 
+      #{articleAttributes,jdbcType=VARCHAR}, #{articleText,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cdmu.pojo.Article">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -160,6 +162,9 @@
       <if test="articleLink != null">
         article_link,
       </if>
+      <if test="articleAttributes != null">
+        article_attributes,
+      </if>
       <if test="articleText != null">
         article_text,
       </if>
@@ -172,16 +177,19 @@
         #{articleTitle,jdbcType=VARCHAR},
       </if>
       <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
+        #{createDate,jdbcType=DATE},
       </if>
       <if test="updateDate != null">
-        #{updateDate,jdbcType=TIMESTAMP},
+        #{updateDate,jdbcType=DATE},
       </if>
       <if test="createMan != null">
         #{createMan,jdbcType=VARCHAR},
       </if>
       <if test="articleLink != null">
         #{articleLink,jdbcType=VARCHAR},
+      </if>
+      <if test="articleAttributes != null">
+        #{articleAttributes,jdbcType=VARCHAR},
       </if>
       <if test="articleText != null">
         #{articleText,jdbcType=LONGVARCHAR},
@@ -207,16 +215,19 @@
         article_title = #{record.articleTitle,jdbcType=VARCHAR},
       </if>
       <if test="record.createDate != null">
-        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+        create_date = #{record.createDate,jdbcType=DATE},
       </if>
       <if test="record.updateDate != null">
-        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+        update_date = #{record.updateDate,jdbcType=DATE},
       </if>
       <if test="record.createMan != null">
         create_man = #{record.createMan,jdbcType=VARCHAR},
       </if>
       <if test="record.articleLink != null">
         article_link = #{record.articleLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleAttributes != null">
+        article_attributes = #{record.articleAttributes,jdbcType=VARCHAR},
       </if>
       <if test="record.articleText != null">
         article_text = #{record.articleText,jdbcType=LONGVARCHAR},
@@ -231,10 +242,11 @@
     set id = #{record.id,jdbcType=INTEGER},
       article_type = #{record.articleType,jdbcType=VARCHAR},
       article_title = #{record.articleTitle,jdbcType=VARCHAR},
-      create_date = #{record.createDate,jdbcType=TIMESTAMP},
-      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      create_date = #{record.createDate,jdbcType=DATE},
+      update_date = #{record.updateDate,jdbcType=DATE},
       create_man = #{record.createMan,jdbcType=VARCHAR},
       article_link = #{record.articleLink,jdbcType=VARCHAR},
+      article_attributes = #{record.articleAttributes,jdbcType=VARCHAR},
       article_text = #{record.articleText,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -245,10 +257,11 @@
     set id = #{record.id,jdbcType=INTEGER},
       article_type = #{record.articleType,jdbcType=VARCHAR},
       article_title = #{record.articleTitle,jdbcType=VARCHAR},
-      create_date = #{record.createDate,jdbcType=TIMESTAMP},
-      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      create_date = #{record.createDate,jdbcType=DATE},
+      update_date = #{record.updateDate,jdbcType=DATE},
       create_man = #{record.createMan,jdbcType=VARCHAR},
-      article_link = #{record.articleLink,jdbcType=VARCHAR}
+      article_link = #{record.articleLink,jdbcType=VARCHAR},
+      article_attributes = #{record.articleAttributes,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -263,16 +276,19 @@
         article_title = #{articleTitle,jdbcType=VARCHAR},
       </if>
       <if test="createDate != null">
-        create_date = #{createDate,jdbcType=TIMESTAMP},
+        create_date = #{createDate,jdbcType=DATE},
       </if>
       <if test="updateDate != null">
-        update_date = #{updateDate,jdbcType=TIMESTAMP},
+        update_date = #{updateDate,jdbcType=DATE},
       </if>
       <if test="createMan != null">
         create_man = #{createMan,jdbcType=VARCHAR},
       </if>
       <if test="articleLink != null">
         article_link = #{articleLink,jdbcType=VARCHAR},
+      </if>
+      <if test="articleAttributes != null">
+        article_attributes = #{articleAttributes,jdbcType=VARCHAR},
       </if>
       <if test="articleText != null">
         article_text = #{articleText,jdbcType=LONGVARCHAR},
@@ -284,10 +300,11 @@
     update t_article
     set article_type = #{articleType,jdbcType=VARCHAR},
       article_title = #{articleTitle,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=DATE},
+      update_date = #{updateDate,jdbcType=DATE},
       create_man = #{createMan,jdbcType=VARCHAR},
       article_link = #{articleLink,jdbcType=VARCHAR},
+      article_attributes = #{articleAttributes,jdbcType=VARCHAR},
       article_text = #{articleText,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -295,10 +312,11 @@
     update t_article
     set article_type = #{articleType,jdbcType=VARCHAR},
       article_title = #{articleTitle,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=DATE},
+      update_date = #{updateDate,jdbcType=DATE},
       create_man = #{createMan,jdbcType=VARCHAR},
-      article_link = #{articleLink,jdbcType=VARCHAR}
+      article_link = #{articleLink,jdbcType=VARCHAR},
+      article_attributes = #{articleAttributes,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

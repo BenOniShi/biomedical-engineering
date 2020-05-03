@@ -22,7 +22,7 @@ import java.util.Set;
  * @Date: 2020/4/23 12:26
  **/
 @Service
-public class ModulesServiceImpl  implements IModulesService {
+public class ModulesServiceImpl implements IModulesService {
 
     @Autowired
     private ModuleMapper moduleMapper;
@@ -30,7 +30,7 @@ public class ModulesServiceImpl  implements IModulesService {
     private IPermissionService permissionService;
 
     @Override
-    public ModulesInfo managerModuleList(Integer roleId ) {
+    public ModulesInfo managerModuleList(Integer roleId) {
         ModulesInfo modulesInfo = permissionService.queryMenuBarByRoleId(roleId);
         Modules modulesHome = new Modules();
         modulesHome.setHref("/manager/index");
@@ -39,8 +39,8 @@ public class ModulesServiceImpl  implements IModulesService {
         System.out.println("-------------------------------------------------");
         System.out.println(modulesHome);
         Modules modulesLogo = new Modules();
-        modulesLogo.setTitle("Ivory");
-        modulesLogo.setImage("/static/images/logo.png");
+        modulesLogo.setTitle("CDMU");
+        modulesLogo.setImage("/static/images/logo1.png");
         modulesLogo.setHref("");
         Modules modulesClear = new Modules();
         modulesClear.setClearUrl("/static/api/clear.json");

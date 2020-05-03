@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html
+        xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <title>本科生科研训练管理系统</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/js/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/js/layui/css/public.css" media="all">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 0px;">
+            <legend>竞赛添加</legend>
+        </fieldset>
+        <div style="margin: 10px 10px 10px 10px">
+
+            <form class="layui-form layui-form-pane" action="" id="form">
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">竞赛名称:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="matchName" autocomplete="off" lay-verify="required"
+                               lay-reqtext="请填写竞赛名称"
+                               class="layui-input">
+                    </div>
+                    <label class="layui-form-label">竞赛主题:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="matchTheme" autocomplete="off" lay-verify="required"
+                               lay-reqtext="请填写竞赛主题"
+                               class="layui-input">
+                    </div>
+
+                </div>
+
+
+                <div class="layui-form-item">
+
+                    <label class="layui-form-label">比赛届数:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="matchSession" autocomplete="off" lay-verify="required"
+                               lay-reqtext="请填写比赛届数"
+                               class="layui-input">
+                    </div>
+
+                    <label class="layui-form-label">竞赛类型:</label>
+                    <div class="layui-input-inline">
+                        <select name="matchType" lay-verify="required" lay-reqtext="请选择竞赛类型">
+                            <option value="" selected="">请选择竞赛类型</option>
+                            <option value="校级竞赛">校级竞赛</option>
+                            <option value="省级竞赛">省级竞赛</option>
+                            <option value="国家级竞赛">国家级竞赛</option>
+                            <option value="国际级竞赛">国际级竞赛</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">竞赛地点:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="matchPlace" autocomplete="off" lay-verify="required"
+                               lay-reqtext="请填写竞赛地点"
+                               class="layui-input">
+                    </div>
+                    <label class="layui-form-label">报名日期:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="enrollDate" id="date1" autocomplete="off" lay-verify="required"
+                               lay-reqtext="前选择报名日期"
+                               class="layui-input">
+                    </div>
+                    <label class="layui-form-label">比赛日期:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="matchDate" id="date2" autocomplete="off" lay-verify="required"
+                               lay-reqtext="请填写比赛日期"
+                               class="layui-input">
+                    </div>
+
+
+                </div>
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">主办方:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="matchHost" autocomplete="off" lay-verify="required"
+                               lay-reqtext="请填写主办方"
+                               class="layui-input">
+                    </div>
+                    <label class="layui-form-label">承办方:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="matchUndertake" autocomplete="off" lay-verify="required"
+                               lay-reqtext="请填写承办方"
+                               class="layui-input">
+                    </div>
+
+
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">参赛人数:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="matchNumber" autocomplete="off" lay-verify="required"
+                               lay-reqtext="请填写参赛人数"
+                               class="layui-input">
+                    </div>
+                    <label class="layui-form-label">参赛要求:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="matchRequirement" autocomplete="off" lay-verify="required"
+                               lay-reqtext="前填写参赛要求"
+                               class="layui-input">
+                    </div>
+
+                </div>
+
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">竞赛介绍:</label>
+                    <div class="layui-input-block">
+                        <textarea name="matchIntroduce" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">
+                        <a class="layui-btn  layui-btn-normal  " lay-submit=""
+                           lay-filter="submit-btn">提交竞赛</a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+<script src="/static/js/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    layui.use(['form', 'table', 'laydate', 'layedit'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            layedit = layui.layedit,
+            laydate = layui.laydate,
+            table = layui.table;
+
+        laydate.render({
+            elem: '#date1'
+            , range: '至'
+        });
+
+        laydate.render({
+            elem: '#date2'
+            , range: '至'
+        });
+
+        form.on('submit(submit-btn)', function (data) {
+            data = data.field;
+            layer.confirm("竞赛名称：" + data.matchName +
+                "<br><br>报名时间:" + data.enrollDate +
+                "<br><br>比赛时间:" + data.matchDate +
+                "<br><br>确定要添加吗？", {
+                title: '添加竞赛'
+            }, function (r) {
+                if (r) {
+                    $.ajax({
+                        type: 'post',
+                        url: '/competition/addMatch',
+                        data: data,
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.code == 200) {
+                                layer.msg("添加成功");
+                                setTimeout(function () {
+                                    location.reload();
+                                }, 1500);
+                            } else {
+                                layer.alert(data.msg);
+                            }
+                        }
+                    });
+                    return false;
+                }
+            });
+            return false;
+        });
+
+    });
+</script>
+
+
+</body>
+</html>

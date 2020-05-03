@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html
+        xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/js/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/js/layui/css/public.css" media="all">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+        <fieldset class="layui-elem-field  layuimini-search">
+            <legend>搜索信息</legend>
+            <div style="margin: 10px 10px 10px 10px">
+                <form class="layui-form layui-form-pane" action="">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">竞赛名称:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="matchName" autocomplete="off"
+                                   class="layui-input"
+                                   placeholder="竞赛名称">
+                        </div>
+
+                        <label class="layui-form-label">竞赛类型:</label>
+                        <div class="layui-input-inline">
+                            <select name="matchType">
+                                <option value="" selected="">请选择竞赛类型</option>
+                                <option value="校级竞赛">校级竞赛</option>
+                                <option value="省级竞赛">省级竞赛</option>
+                                <option value="国家级竞赛">国家级竞赛</option>
+                                <option value="国际级竞赛">国际级竞赛</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <a class="layui-btn  layui-btn-normal  layui-btn-radius" lay-submit=""
+                               lay-filter="search-btn">搜索</a>
+                            <button type="reset" id="clearForm"
+                                    class="layui-btn  layui-btn-normal  layui-btn-radius layui-btn-warm"
+                                    lay-submit="">重置
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+
+        <table class="layui-hide" id="matchListTable" lay-filter="matchListTableFilter"></table>
+        <script type="text/html" id="matchListBar">
+            <div class="layui-btn-group">
+                <a class="layui-btn layui-btn-sm data-count-edit " lay-event="sign-up">报名</a>
+                <a class="layui-btn layui-btn-sm data-count-edit layui-btn-warm" lay-event="edit">编辑</a>
+                <a class="layui-btn layui-btn-sm data-count-edit layui-btn-danger" lay-event="delete">删除</a>
+            </div>
+        </script>
+    </div>
+</div>
+<script src="/static/js/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
+<script src="/static/js/layui/layui.js" charset="utf-8"></script>
+<script src="/static/js/lib/axios/axios.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+    layui.use(['form', 'table', 'laydate'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            laydate = layui.laydate,
+            table = layui.table;
+
+
+        table.render({
+            elem: '#matchListTable',
+            url: '/competition/queryMatchByParams',
+            response: {
+                statusCode: 200 //规定成功的状态码，默认：0
+            },
+            parseData: function (res) { //res 即为原始返回的数据
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count": res.data.total, //解析数据长度
+                    "data": res.data.list //解析数据列表
+                };
+            },
+            initSort: {
+                field: 'createDate'
+                , type: 'desc'
+            },
+            cols: [
+                [
+                    {field: 'id', width: 50, title: 'ID', align: "center"},
+                    {field: 'matchName', width: 300, title: '竞赛名称', align: "center"},
+                    {field: 'matchTheme', width: 150, title: '竞赛主题', align: "center"},
+                    {field: 'matchType', width: 150, title: '竞赛类型', align: "center"},
+                    {field: 'matchPlace', width: 150, title: '竞赛地点', align: "center"},
+                    {field: 'enrollDate', width: 250, title: '报名时间', align: "center"},
+                    {field: 'matchDate', width: 250, title: '竞赛时间', align: "center"},
+                    {title: '操作', width: 300, templet: '#matchListBar', fixed: "right", align: "center"}
+                ]
+            ],
+            limits: [10, 25, 100],
+            limit: 100,
+            even: true,
+            page: true
+        });
+
+
+        table.on('tool(matchListTableFilter)', function (obj) {
+            var data = obj.data;
+            //将这一行的表格数据转换为json串
+            json = JSON.stringify(data);
+            //父页面向子页面传值
+            window.PartitionJson = json;
+            if (obj.event === 'edit') {
+                layer.open({
+                    type: 2,
+                    title: ['文章编辑界面', 'font-size:22px; text-align:center '],
+                    shadeClose: true,
+                    shade: false,
+                    offset: 'auto',
+                    skin: ' layui-layer-molv',
+                    maxmin: true, //开启最大化最小化按钮
+                    area: ['1400px', '700px'],
+                    content: '/customer/updateCustomerPage',
+                });
+            } else if (obj.event === 'delete') {
+                layer.confirm('确定要删除该竞赛嘛？', function (index) {
+                    if (index) {
+                        $.ajax({
+                            type: 'delete',
+                            url: '/competition/deleteMatchById/' + data.id,
+                            datatype: 'json',
+                            success: function (data) {
+                                if (data.code == 200) {
+                                    layer.msg("删除成功");
+                                    obj.del();
+                                    layer.close(index);
+                                } else {
+                                    layer.msg(data.msg)
+                                }
+                                ;
+                            }
+                        });
+                    }
+                    ;
+                });
+            } else if (obj.event === 'sign-up') {
+                layer.open({
+                    type: 2,
+                    title: ['报名参赛界面', 'font-size:22px; text-align:center '],
+                    shadeClose: true,
+                    shade: false,
+                    offset: 'auto',
+                    skin: ' layui-layer-molv',
+                    maxmin: true, //开启最大化最小化按钮
+                    area: ['1400px', '700px'],
+                    content: '/customer/updateCustomerPage',
+                });
+            } //else
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="common-view/head"></head>
+<body>
+<div th:include="common-view/header"></div>
+<div th:include="common-view/nav"></div>
+<script src="/static/js/cg.autoNav.js"></script>
+<script src="/static/js/nav.cg-nav.js"></script>
+
+
+<div class="content width_1000 clearfix">
+
+    <div class="list-left fl">
+        <div class="catalogBox">
+
+            <div th:include="common-view/list-left"></div>
+        </div>
+    </div>
+    <script src="/static/js/catalogList.li.js"></script>
+
+    <div class="list-right fr">
+        <div class="cg-position">
+
+            当前位置：<a href="/kyxl/">首页</a> > <a href="" th:text="${title}" id="title"></a>
+        </div>
+        <div class="list-right-content new">
+            <ul class="cg-news-list" style="padding-top: 0" id="znlc">
+
+            </ul>
+
+        </div>
+    </div>
+
+</div>
+
+
+<div th:include="common-view/footer"></div>
+<script src="/static/js/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
+<script src="/static/js/lib/axios/axios.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+    axios({
+        method: 'get',
+        params: {
+            articleType: '常见问题',
+        },
+        url: '/index/queryArticleByType',
+    }).then(response => {
+        var res = response.data;
+        var pageInfo = res.data;
+        var result = pageInfo.list;
+        for (let i = 0; i < result.length; i++) {
+            var html = '<li>';
+            html += '<a href="/index/queryArticle?articleId=' + result[i].id + '"  class = "art-heading"> '
+            html += ' ' + result[i].articleTitle.substring(0, 10) + '.... ';
+            html += '</a>'
+            html += ' <span class= "art-date" >' + result[i].createDate + '</span>';
+            html += ' </li>'
+            $("#cjwt").append(html);
+        }
+    });
+
+    axios({
+        method: 'get',
+        params: {
+            articleType: '相关文件',
+        },
+        url: '/index/queryArticleByType',
+    }).then(response => {
+        var res = response.data;
+        var pageInfo = res.data;
+        var result = pageInfo.list;
+        for (let i = 0; i < result.length; i++) {
+            var html = '<li>';
+            html += '<a href="/index/queryArticle?articleId=' + result[i].id + '"  class = "art-heading"> '
+            html += ' ' + result[i].articleTitle + '';
+            html += '</a>'
+            html += ' </li>'
+            $("#xgwj").append(html);
+        }
+    });
+
+
+    axios({
+        method: 'get',
+        params: {
+            articleType: document.getElementById("title").innerText,
+        },
+        url: '/index/queryArticleByType',
+    }).then(response => {
+        var res = response.data;
+        var pageInfo = res.data;
+        var result = pageInfo.list;
+        for (let i = 0; i < result.length; i++) {
+            var html = '<li>';
+            html += '<a href="/index/queryArticle?articleId=' + result[i].id + '"  class = "art-heading"> '
+            html += ' ' + result[i].articleTitle.substring(0, 40) + '.... ';
+            html += '</a>'
+            html += ' <span class= "art-date" >[' + result[i].createDate + ']</span>';
+            html += ' </li>'
+            $("#znlc").append(html);
+        }
+    });
+</script>
+</body>
+</html>

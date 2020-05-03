@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdmu.mapper.MatchMapper">
+  <resultMap id="BaseResultMap" type="com.cdmu.pojo.Match">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="match_name" jdbcType="VARCHAR" property="matchName" />
+    <result column="match_theme" jdbcType="VARCHAR" property="matchTheme" />
+    <result column="match_session" jdbcType="VARCHAR" property="matchSession" />
+    <result column="match_type" jdbcType="VARCHAR" property="matchType" />
+    <result column="match_place" jdbcType="VARCHAR" property="matchPlace" />
+    <result column="enroll_date" jdbcType="VARCHAR" property="enrollDate" />
+    <result column="match_date" jdbcType="VARCHAR" property="matchDate" />
+    <result column="match_host" jdbcType="VARCHAR" property="matchHost" />
+    <result column="match_undertake" jdbcType="VARCHAR" property="matchUndertake" />
+    <result column="match_number" jdbcType="VARCHAR" property="matchNumber" />
+    <result column="match_requirement" jdbcType="VARCHAR" property="matchRequirement" />
+    <result column="match_introduce" jdbcType="VARCHAR" property="matchIntroduce" />
+    <result column="match_state" jdbcType="VARCHAR" property="matchState" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, match_name, match_theme, match_session, match_type, match_place, enroll_date, 
+    match_date, match_host, match_undertake, match_number, match_requirement, match_introduce, 
+    match_state
+  </sql>
+  <select id="selectByExample" parameterType="com.cdmu.pojo.MatchExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_match
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_match
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_match
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cdmu.pojo.MatchExample">
+    delete from t_match
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cdmu.pojo.Match">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_match (match_name, match_theme, match_session, 
+      match_type, match_place, enroll_date, 
+      match_date, match_host, match_undertake, 
+      match_number, match_requirement, match_introduce, 
+      match_state)
+    values (#{matchName,jdbcType=VARCHAR}, #{matchTheme,jdbcType=VARCHAR}, #{matchSession,jdbcType=VARCHAR}, 
+      #{matchType,jdbcType=VARCHAR}, #{matchPlace,jdbcType=VARCHAR}, #{enrollDate,jdbcType=VARCHAR}, 
+      #{matchDate,jdbcType=VARCHAR}, #{matchHost,jdbcType=VARCHAR}, #{matchUndertake,jdbcType=VARCHAR}, 
+      #{matchNumber,jdbcType=VARCHAR}, #{matchRequirement,jdbcType=VARCHAR}, #{matchIntroduce,jdbcType=VARCHAR}, 
+      #{matchState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cdmu.pojo.Match">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_match
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="matchName != null">
+        match_name,
+      </if>
+      <if test="matchTheme != null">
+        match_theme,
+      </if>
+      <if test="matchSession != null">
+        match_session,
+      </if>
+      <if test="matchType != null">
+        match_type,
+      </if>
+      <if test="matchPlace != null">
+        match_place,
+      </if>
+      <if test="enrollDate != null">
+        enroll_date,
+      </if>
+      <if test="matchDate != null">
+        match_date,
+      </if>
+      <if test="matchHost != null">
+        match_host,
+      </if>
+      <if test="matchUndertake != null">
+        match_undertake,
+      </if>
+      <if test="matchNumber != null">
+        match_number,
+      </if>
+      <if test="matchRequirement != null">
+        match_requirement,
+      </if>
+      <if test="matchIntroduce != null">
+        match_introduce,
+      </if>
+      <if test="matchState != null">
+        match_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="matchName != null">
+        #{matchName,jdbcType=VARCHAR},
+      </if>
+      <if test="matchTheme != null">
+        #{matchTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="matchSession != null">
+        #{matchSession,jdbcType=VARCHAR},
+      </if>
+      <if test="matchType != null">
+        #{matchType,jdbcType=VARCHAR},
+      </if>
+      <if test="matchPlace != null">
+        #{matchPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="enrollDate != null">
+        #{enrollDate,jdbcType=VARCHAR},
+      </if>
+      <if test="matchDate != null">
+        #{matchDate,jdbcType=VARCHAR},
+      </if>
+      <if test="matchHost != null">
+        #{matchHost,jdbcType=VARCHAR},
+      </if>
+      <if test="matchUndertake != null">
+        #{matchUndertake,jdbcType=VARCHAR},
+      </if>
+      <if test="matchNumber != null">
+        #{matchNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="matchRequirement != null">
+        #{matchRequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="matchIntroduce != null">
+        #{matchIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="matchState != null">
+        #{matchState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cdmu.pojo.MatchExample" resultType="java.lang.Long">
+    select count(*) from t_match
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_match
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.matchName != null">
+        match_name = #{record.matchName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchTheme != null">
+        match_theme = #{record.matchTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchSession != null">
+        match_session = #{record.matchSession,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchType != null">
+        match_type = #{record.matchType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchPlace != null">
+        match_place = #{record.matchPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enrollDate != null">
+        enroll_date = #{record.enrollDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchDate != null">
+        match_date = #{record.matchDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchHost != null">
+        match_host = #{record.matchHost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchUndertake != null">
+        match_undertake = #{record.matchUndertake,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchNumber != null">
+        match_number = #{record.matchNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchRequirement != null">
+        match_requirement = #{record.matchRequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchIntroduce != null">
+        match_introduce = #{record.matchIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchState != null">
+        match_state = #{record.matchState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_match
+    set id = #{record.id,jdbcType=INTEGER},
+      match_name = #{record.matchName,jdbcType=VARCHAR},
+      match_theme = #{record.matchTheme,jdbcType=VARCHAR},
+      match_session = #{record.matchSession,jdbcType=VARCHAR},
+      match_type = #{record.matchType,jdbcType=VARCHAR},
+      match_place = #{record.matchPlace,jdbcType=VARCHAR},
+      enroll_date = #{record.enrollDate,jdbcType=VARCHAR},
+      match_date = #{record.matchDate,jdbcType=VARCHAR},
+      match_host = #{record.matchHost,jdbcType=VARCHAR},
+      match_undertake = #{record.matchUndertake,jdbcType=VARCHAR},
+      match_number = #{record.matchNumber,jdbcType=VARCHAR},
+      match_requirement = #{record.matchRequirement,jdbcType=VARCHAR},
+      match_introduce = #{record.matchIntroduce,jdbcType=VARCHAR},
+      match_state = #{record.matchState,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cdmu.pojo.Match">
+    update t_match
+    <set>
+      <if test="matchName != null">
+        match_name = #{matchName,jdbcType=VARCHAR},
+      </if>
+      <if test="matchTheme != null">
+        match_theme = #{matchTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="matchSession != null">
+        match_session = #{matchSession,jdbcType=VARCHAR},
+      </if>
+      <if test="matchType != null">
+        match_type = #{matchType,jdbcType=VARCHAR},
+      </if>
+      <if test="matchPlace != null">
+        match_place = #{matchPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="enrollDate != null">
+        enroll_date = #{enrollDate,jdbcType=VARCHAR},
+      </if>
+      <if test="matchDate != null">
+        match_date = #{matchDate,jdbcType=VARCHAR},
+      </if>
+      <if test="matchHost != null">
+        match_host = #{matchHost,jdbcType=VARCHAR},
+      </if>
+      <if test="matchUndertake != null">
+        match_undertake = #{matchUndertake,jdbcType=VARCHAR},
+      </if>
+      <if test="matchNumber != null">
+        match_number = #{matchNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="matchRequirement != null">
+        match_requirement = #{matchRequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="matchIntroduce != null">
+        match_introduce = #{matchIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="matchState != null">
+        match_state = #{matchState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cdmu.pojo.Match">
+    update t_match
+    set match_name = #{matchName,jdbcType=VARCHAR},
+      match_theme = #{matchTheme,jdbcType=VARCHAR},
+      match_session = #{matchSession,jdbcType=VARCHAR},
+      match_type = #{matchType,jdbcType=VARCHAR},
+      match_place = #{matchPlace,jdbcType=VARCHAR},
+      enroll_date = #{enrollDate,jdbcType=VARCHAR},
+      match_date = #{matchDate,jdbcType=VARCHAR},
+      match_host = #{matchHost,jdbcType=VARCHAR},
+      match_undertake = #{matchUndertake,jdbcType=VARCHAR},
+      match_number = #{matchNumber,jdbcType=VARCHAR},
+      match_requirement = #{matchRequirement,jdbcType=VARCHAR},
+      match_introduce = #{matchIntroduce,jdbcType=VARCHAR},
+      match_state = #{matchState,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -89,11 +89,11 @@ table {
 }
 
 .cg-nav li:hover,.cg-nav li.current {
-	border-bottom:3px solid #e58100;
+	/*border-bottom:3px solid #e58100;*/
 	height: 36px;
 }
 .cg-nav li:hover a {
-	color:#e58100;
+	/*color:#e58100;*/
 }
 .login {
 	width:80px;

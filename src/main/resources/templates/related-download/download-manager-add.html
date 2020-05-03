@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html
+        xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/js/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/js/layui/css/public.css" media="all">
+    <style>
+        .w-e-text-container {
+            height: 700px !important; /*!important是重点，因为原div是行内样式设置的高度300px*/
+        }
+    </style>
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 0px;">
+            <legend>指导文件上传</legend>
+        </fieldset>
+
+        <div style="margin: 10px 10px 10px 10px">
+            <form class="layui-form layui-form-pane" action="">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">文件标题:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="articleTitle" autocomplete="off" lay-verify="required"
+                               lay-reqtext="请填写文件标题"
+                               class="layui-input">
+                    </div>
+                    <label class="layui-form-label">创建日期:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="createDate" id="date" autocomplete="off" lay-verify="required"
+                               lay-reqtext="请选择创建日期"
+                               class="layui-input">
+                    </div>
+                    <label class="layui-form-label">创建人:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="createMan" autocomplete="on" lay-verify="required"
+                               lay-reqtext="请填写创建人"
+                               class="layui-input">
+                    </div>
+
+                    <label class="layui-form-label">文件类型:</label>
+                    <div class="layui-input-inline">
+                        <select name="articleType" lay-verify="required" lay-reqtext="请选择文件类型">
+                            <option value="" selected="">请选择文件类型</option>
+                            <option value="指导文件">指南流程</option>
+                            <option value="相关下载">相关下载</option>
+                        </select>
+                    </div>
+
+
+                    <input type="hidden" name="articleLink" id="articleLink"
+                           class="layui-input">
+
+                    <input type="hidden" name="articleAttributes"  value="2"
+                           class="layui-input">
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>
+                        <button type="button" class="layui-btn" id="test9">开始上传</button>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">
+                        <a class="layui-btn  layui-btn-normal" lay-submit=""
+                           lay-filter="search-btn">提交文件</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<script src="/static/js/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
+<script src="/static/js/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    layui.use(['form', 'table', 'laydate'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            laydate = layui.laydate,
+            table = layui.table;
+
+
+        laydate.render({
+            elem: '#date'
+        });
+
+
+        form.on('submit(search-btn)', function (data) {
+            data = data.field;
+            layer.confirm("文章标题：" + data.articleTitle +
+                "<br><br>编辑人:" + data.createMan +
+                "<br><br>日期:" + data.createDate +
+                "<br><br>确定要添加吗？", {
+                title: '添加文件'
+            }, function (r) {
+                if (r) {
+                    $.ajax({
+                        type: 'post',
+                        url: '/article/addArticle',
+                        data: data,
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.code == 200) {
+                                layer.msg("添加成功");
+                                setTimeout(function () {
+                                    location.reload();
+                                }, 1500);
+                            } else {
+                                layer.alert(data.msg);
+                            }
+                        }
+                    });
+                    return false;
+                }
+            });
+            return false;
+        });
+
+    });
+</script>
+</body>
+</html>

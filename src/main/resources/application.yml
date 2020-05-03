@@ -13,4 +13,4 @@ shiro:
   login-url: /index/login
   log-out-url: /login/logout*
   authc-urls:
-    - /**
+    - /manager/**

@@ -1,4 +1,4 @@
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.w3.org/1999/xhtml">
 <div class="nav" th:fragment="nav">
     <div class="navBox width_1000">
         <ul class="cg-nav fl">
@@ -6,23 +6,24 @@
                 <a href="/index/index">首页</a>
             </li>
             <li style="padding-left: 41px; padding-right: 41px;">
-                <a href="/process/list">指南流程</a>
+                <a href="/index/process">指南流程</a>
             </li>
             <li style="padding-left: 41px; padding-right: 41px;">
-                <a href="/news/list">新闻动态</a>
+                <a href="/index/news">新闻动态</a>
             </li>
             <li style="padding-left: 41px; padding-right: 41px;">
-                <a href="/kyxl/xtgg_tzlist.action?nav=kyxl&type=kyxl">科研训练</a>
+                <a href="/index/training">科研训练</a>
             </li>
             <li style="padding-left: 41px; padding-right: 41px;">
-                <a href="http://kyjs.zju.edu.cn/xkjs/">学科竞赛</a>
+                <a href="/index/competition">学科竞赛</a>
             </li>
             <li style="padding-left: 41px; padding-right: 41px;">
-                <a href="/download/list">相关下载</a>
+                <a href="/index/download">相关下载</a>
             </li>
         </ul>
         <div class="login fr">
             <a href="/index/login">登陆</a>
+            <a href="/manager/main" shiro:hasPermission="manager:index">后台</a>
             <div class="fr">
                 <div id="login_box" class="login-box" style="display:none;background:#ccc">
                     <div class="login-box-top">

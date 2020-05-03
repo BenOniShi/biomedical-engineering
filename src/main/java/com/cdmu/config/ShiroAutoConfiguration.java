@@ -49,6 +49,8 @@ public class ShiroAutoConfiguration {
      */
     private String loginUrl = "/index/login";
 
+    private String indexUrl = "/index/index";
+
     private String logOutUrl = "/login/logout";
 
     private String[] anonUrls;
@@ -95,7 +97,7 @@ public class ShiroAutoConfiguration {
         // 设置安全管理器
         factoryBean.setSecurityManager(securityManager);
         // 设置未登陆的时要跳转的页面
-        factoryBean.setLoginUrl(loginUrl);
+        factoryBean.setLoginUrl(indexUrl);
         Map<String, String> filterChainDefinitionMap = new HashMap<>();
         // 设置放行的路径
         if (anonUrls != null && anonUrls.length > 0) {
