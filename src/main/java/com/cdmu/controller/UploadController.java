@@ -38,14 +38,14 @@ public class UploadController {
         String filename = file.getOriginalFilename();
         String suffixName = filename.substring(filename.lastIndexOf("."));
         String md5FileName = new Md5Hash(filename + new Date()) + suffixName;
-        String path = env.getProperty("upload-file-path") + "/" + md5FileName;
+        String path = env.getProperty("upload-file-path") + "/" + filename;
         File dest = new File(path);
         if (!dest.getParentFile().exists()) {
             dest.getParentFile().mkdir();
         }
         try {
             file.transferTo(dest);
-            return resultInfoUtil.success(ResultConstant.SUCCESS_CODE, ResultConstant.SUCCESS_MSG, md5FileName);
+            return resultInfoUtil.success(ResultConstant.SUCCESS_CODE, ResultConstant.SUCCESS_MSG, filename);
         } catch (IOException e) {
             e.printStackTrace();
         }
