@@ -51,7 +51,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     /**
      * 解决服务器后台返回json乱码start
      *
-     * @return
+     * @return/
      */
     @Bean
     public HttpMessageConverter<String> responseBodyConverter() {
