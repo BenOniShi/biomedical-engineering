@@ -2,6 +2,7 @@ package com.cdmu.aop;
 
 import com.cdmu.annotation.LoggerAnnotation;
 import com.cdmu.controller.BaseController;
+import com.cdmu.service.ILogService;
 import com.cdmu.utils.JsonUtil;
 import com.cdmu.utils.SessionUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -37,6 +38,8 @@ public class WebLogAspect extends BaseController {
     private RabbitTemplate rabbitTemplate;
     @Autowired
     private Environment env;
+    @Autowired
+    private ILogService logService;
 
     private Logger logger = LoggerFactory.getLogger(com.cdmu.aop.WebLogAspect.class);
 
