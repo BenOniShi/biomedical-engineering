@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html
+        xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <title>本科生科研训练管理系统</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/js/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/js/layui/css/public.css" media="all">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 0px;">
+            <legend>竞赛状态修改</legend>
+        </fieldset>
+        <div style="margin: 10px 10px 10px 10px">
+
+            <form class="layui-form layui-form-pane" lay-filter="example" action="" id="form">
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">竞赛名称:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="matchName" class="layui-input" disabled>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+
+                    <label class="layui-form-label">竞赛主题:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="matchTheme" class="layui-input" disabled>
+                    </div>
+
+                </div>
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">竞赛地点:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="matchPlace" class="layui-input" disabled>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+
+                    <label class="layui-form-label">报名日期:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="enrollDate" class="layui-input" disabled>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+
+                    <label class="layui-form-label">比赛日期:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="matchDate" class="layui-input" disabled>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+
+                    <label class="layui-form-label">竞赛状态:</label>
+                    <div class="layui-input-inline">
+                        <select name="matchState" lay-verify="required" lay-reqtext="请选择竞赛状态">
+                            <option value="" selected="">竞赛状态</option>
+                            <option value="报名中">报名中</option>
+                            <option value="进行中">进行中</option>
+                            <option value="已结束">已结束</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">
+                        <a class="layui-btn  layui-btn-normal  " lay-submit=""
+                           lay-filter="submit-btn">修改竞赛状态</a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+<script src="/static/js/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    layui.use(['form', 'table', 'laydate', 'layedit'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            layedit = layui.layedit,
+            laydate = layui.laydate,
+            table = layui.table;
+
+
+        var parent_json = eval('(' + parent.PartitionJson + ')');
+        //注意：parent 是 JS 自带的全局对象，可用于操作父页面
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+
+        console.log(parent_json);
+
+        form.val('example', {
+            enrollDate: parent_json.enrollDate.replace("到", '至'),
+            matchDate: parent_json.matchDate.replace("到", '至'),
+            matchPlace: parent_json.matchPlace,
+            matchTheme: parent_json.matchTheme,
+            matchName: parent_json.matchName,
+            matchState: parent_json.matchState,
+        })
+
+
+        form.on('submit(submit-btn)', function (data) {
+            data = data.field;
+            layer.confirm("竞赛名称：" + data.matchName +
+                "<br><br>报名时间:" + data.enrollDate +
+                "<br><br>比赛时间:" + data.matchDate +
+                "<br><br>确定要修改竞赛状态吗？", {
+                title: '修改竞赛状态'
+            }, function (r) {
+                if (r) {
+                    $.ajax({
+                        type: 'put',
+                        url: '/competition/updateMatch/' + parent_json.id,
+                        data: data,
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.code == 200) {
+                                layer.msg("竞赛状态修改成功");
+                                setTimeout(function () {
+                                    reload();
+                                }, 1500);
+                            } else {
+                                layer.alert(data.msg);
+                            }
+                        }
+                    });
+                    return false;
+                }
+            });
+            return false;
+        });
+
+        function reload() {
+            parent.layui.table.reload('matchListTable');//重载父页表格，参数为表格ID
+            parent.layer.close(index);
+        }
+
+
+    });
+</script>
+
+
+</body>
+</html>

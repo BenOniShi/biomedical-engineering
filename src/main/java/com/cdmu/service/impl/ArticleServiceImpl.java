@@ -28,7 +28,7 @@ public class ArticleServiceImpl implements IArticleService {
         ArticleExample.Criteria criteria = articleExample.createCriteria();
         criteria.andArticleAttributesEqualTo(articleAttributes);
         PageHelper.startPage(page, limit);
-        return new PageInfo(articleMapper.selectByExample(articleExample));
+        return new PageInfo(articleMapper.selectByExampleWithBLOBs(articleExample));
     }
 
     @Override
@@ -55,5 +55,11 @@ public class ArticleServiceImpl implements IArticleService {
     @Override
     public Article queryArticleById(Integer articleId) {
         return articleMapper.selectByPrimaryKey(articleId);
+    }
+
+    @Override
+    public void updateArticle(Integer id, Article article) {
+        article.setId(id);
+        articleMapper.updateByPrimaryKeyWithBLOBs(article);
     }
 }

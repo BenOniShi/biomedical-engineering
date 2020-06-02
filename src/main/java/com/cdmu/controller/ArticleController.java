@@ -42,6 +42,9 @@ public class ArticleController {
             case "manager-add":
                 modelAndView.setViewName("article-list/article-manager-add");
                 break;
+            case "manager-update":
+                modelAndView.setViewName("article-list/article-manager-update");
+                break;
 
             default:
                 break;
@@ -75,6 +78,13 @@ public class ArticleController {
     @ResponseBody
     public ResultInfo deleteArticleByArticleId(@PathVariable Integer articleId) {
         articleService.deleteArticleByArticleId(articleId);
+        return resultInfoUtil.success();
+    }
+
+    @RequestMapping(value = "/updateArticle/{id}",method = RequestMethod.PUT)
+    @ResponseBody
+    public ResultInfo updateArticle(@PathVariable Integer id,Article article){
+        articleService.updateArticle(id,article);
         return resultInfoUtil.success();
     }
 

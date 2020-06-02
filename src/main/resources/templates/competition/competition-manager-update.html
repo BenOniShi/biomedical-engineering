@@ -19,7 +19,7 @@
         </fieldset>
         <div style="margin: 10px 10px 10px 10px">
 
-            <form class="layui-form layui-form-pane" action="" id="form">
+            <form class="layui-form layui-form-pane" lay-filter="example" action="" id="form">
 
 
                 <div class="layui-form-item">
@@ -31,13 +31,14 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
+
                     <label class="layui-form-label">竞赛主题:</label>
+
                     <div class="layui-input-block">
                         <input type="text" name="matchTheme" autocomplete="off" lay-verify="required"
                                lay-reqtext="请填写竞赛主题"
                                class="layui-input">
                     </div>
-
                 </div>
 
 
@@ -131,7 +132,7 @@
                 <div class="layui-form-item">
                     <div class="layui-input-inline">
                         <a class="layui-btn  layui-btn-normal  " lay-submit=""
-                           lay-filter="submit-btn">提交竞赛</a>
+                           lay-filter="submit-btn">修改竞赛信息</a>
                     </div>
                 </div>
             </form>
@@ -149,6 +150,30 @@
             laydate = layui.laydate,
             table = layui.table;
 
+
+        var parent_json = eval('(' + parent.PartitionJson + ')');
+        //注意：parent 是 JS 自带的全局对象，可用于操作父页面
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+
+        console.log(parent_json);
+
+        form.val('example', {
+            enrollDate: parent_json.enrollDate.replace("到", '至'),
+            matchDate: parent_json.matchDate.replace("到", '至'),
+            matchHost: parent_json.matchHost,
+            matchIntroduce: parent_json.matchIntroduce,
+            matchName: parent_json.matchName,
+            matchNumber: parent_json.matchNumber,
+            matchPlace: parent_json.matchPlace,
+            matchRequirement: parent_json.matchRequirement,
+            matchSession: parent_json.matchSession,
+            matchState: parent_json.matchState,
+            matchTheme: parent_json.matchTheme,
+            matchType: parent_json.matchType,
+            matchUndertake: parent_json.matchUndertake,
+        })
+
         laydate.render({
             elem: '#date1'
             , range: '至'
@@ -164,20 +189,20 @@
             layer.confirm("竞赛名称：" + data.matchName +
                 "<br><br>报名时间:" + data.enrollDate +
                 "<br><br>比赛时间:" + data.matchDate +
-                "<br><br>确定要添加吗？", {
-                title: '添加竞赛'
+                "<br><br>确定要修改吗？", {
+                title: '修改竞赛'
             }, function (r) {
                 if (r) {
                     $.ajax({
-                        type: 'post',
-                        url: '/competition/addMatch',
+                        type: 'put',
+                        url: '/competition/updateMatch/' + parent_json.id,
                         data: data,
                         dataType: 'json',
                         success: function (data) {
                             if (data.code == 200) {
-                                layer.msg("添加成功");
+                                layer.msg("修改竞赛信息成功");
                                 setTimeout(function () {
-                                    location.reload();
+                                    reload();
                                 }, 1500);
                             } else {
                                 layer.alert(data.msg);
@@ -189,6 +214,11 @@
             });
             return false;
         });
+
+        function reload() {
+            parent.layui.table.reload('matchListTable');//重载父页表格，参数为表格ID
+            parent.layer.close(index);
+        }
 
     });
 </script>

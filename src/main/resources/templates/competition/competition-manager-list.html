@@ -51,7 +51,7 @@
         <table class="layui-hide" id="matchListTable" lay-filter="matchListTableFilter"></table>
         <script type="text/html" id="matchListBar">
             <div class="layui-btn-group">
-                <a class="layui-btn layui-btn-sm data-count-edit " lay-event="sign-up">管理竞赛</a>
+                <a class="layui-btn layui-btn-sm data-count-edit " lay-event="sign">管理竞赛</a>
                 <a class="layui-btn layui-btn-sm data-count-edit layui-btn-warm" lay-event="edit">编辑竞赛</a>
                 <a class="layui-btn layui-btn-sm data-count-edit layui-btn-danger" lay-event="delete">删除竞赛</a>
             </div>
@@ -122,7 +122,7 @@
                     skin: ' layui-layer-molv',
                     maxmin: true, //开启最大化最小化按钮
                     area: ['1400px', '700px'],
-                    content: '/customer/updateCustomerPage',
+                    content: '/competition/manager-update',
                 });
             } else if (obj.event === 'delete') {
                 layer.confirm('确定要删除该竞赛嘛？', function (index) {
@@ -145,7 +145,7 @@
                     }
                     ;
                 });
-            } else if (obj.event === 'sign-up') {
+            } else if (obj.event === 'sign') {
                 layer.open({
                     type: 2,
                     title: ['竞赛管理界面', 'font-size:22px; text-align:center '],
@@ -154,8 +154,8 @@
                     offset: 'auto',
                     skin: ' layui-layer-molv',
                     maxmin: true, //开启最大化最小化按钮
-                    area: ['1400px', '700px'],
-                    content: '/customer/updateCustomerPage',
+                    area: ['800px', '500px'],
+                    content: '/competition/manager-state',
                 });
             } //else
         });

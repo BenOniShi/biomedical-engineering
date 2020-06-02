@@ -36,7 +36,12 @@ public class CompetitionController {
             case "manager-add":
                 modelAndView.setViewName("competition/competition-manager-add");
                 break;
-
+            case "manager-update":
+                modelAndView.setViewName("competition/competition-manager-update");
+                break;
+            case "manager-state":
+                modelAndView.setViewName("competition/competition-manager-state");
+                break;
             default:
                 break;
         }
@@ -72,6 +77,12 @@ public class CompetitionController {
         return resultInfoUtil.success();
     }
 
+    /**
+     * 删除竞赛信息
+     *
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/deleteMatchById/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public ResultInfo deleteMatchById(@PathVariable Integer id) {
@@ -91,12 +102,32 @@ public class CompetitionController {
         return resultInfoUtil.success(matchService.queryMatchByType(matchType));
     }
 
+    /**
+     * 查看竞赛界面
+     *
+     * @param matchId
+     * @return
+     */
     @RequestMapping(value = "queryMatch", method = RequestMethod.GET)
     public ModelAndView queryArticle(Integer matchId) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("match", matchService.queryMatchById(matchId));
         modelAndView.setViewName("competition/competition-match-list");
         return modelAndView;
+    }
+
+    /**
+     * 竞赛信息修改
+     *
+     * @param id
+     * @param match
+     * @return
+     */
+    @RequestMapping(value = "/updateMatch/{id}", method = RequestMethod.PUT)
+    @ResponseBody
+    public ResultInfo updateMatch(@PathVariable Integer id, Match match) {
+        matchService.updateMatch(id, match);
+        return resultInfoUtil.success();
     }
 
 

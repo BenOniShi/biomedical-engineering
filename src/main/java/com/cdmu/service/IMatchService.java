@@ -17,4 +17,6 @@ public interface IMatchService {
     PageInfo queryMatchByType(String matchType);
 
     Match queryMatchById(Integer matchId);
+
+    void updateMatch(Integer id, Match match);
 }

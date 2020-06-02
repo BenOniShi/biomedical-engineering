@@ -18,4 +18,6 @@ public interface IArticleService {
     PageInfo queryArticleByType(Integer page,Integer limit,String articleType);
 
     Article queryArticleById(Integer articleId);
+
+    void updateArticle(Integer id, Article article);
 }

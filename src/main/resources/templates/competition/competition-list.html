@@ -64,7 +64,7 @@
                         <h3>省级竞赛</h3>
                         <a href="/xkjs/front/sjjs?jsjb=Q240Zlg3JUdvZjAx&type=Q240ZlhzJUdvZjAxampz"> 更多 > </a>
                     </div>
-                    <ul class="cg-news-list">
+                    <ul class="cg-news-list" id="sjjs">
 
 
                     </ul>
@@ -74,7 +74,7 @@
                         <h3>国家级竞赛</h3>
                         <a href="/xkjs/front/gjjs?jsjb=Q240Zlg2JUdvZjAx&type=Q240ZlhnJUdvZjAxampz"> 更多 > </a>
                     </div>
-                    <ul class="cg-news-list">
+                    <ul class="cg-news-list" id="gjjs">
 
 
                     </ul>
@@ -84,7 +84,7 @@
                         <h3>国际级竞赛</h3>
                         <a href="/xkjs/front/zjjs?jsjb=Q240Zlg1JUdvZjAx&type=Q240Zlh6JUdvZjAxampz"> 更多 > </a>
                     </div>
-                    <ul class="cg-news-list">
+                    <ul class="cg-news-list" id="gjjjs">
 
 
                     </ul>
@@ -199,7 +199,7 @@
             html += '<a href="/competition/queryMatch?matchId=' + result[i].id + ' " class="art-heading">' + result[i].matchName + '</a>'
             html += '<span class="art-date sbz">' + result[i].matchState + '</span>'
             html += ' </li>'
-            $("#xjjs").append(html);
+            $("#sjjs").append(html);
         }
     });
 
@@ -219,7 +219,7 @@
             html += '<a href="/competition/queryMatch?matchId=' + result[i].id + ' " class="art-heading">' + result[i].matchName + '</a>'
             html += '<span class="art-date sbz">' + result[i].matchState + '</span>'
             html += ' </li>'
-            $("#xjjs").append(html);
+            $("#gjjs").append(html);
         }
     });
 
@@ -239,7 +239,7 @@
             html += '<a href="/competition/queryMatch?matchId=' + result[i].id + ' " class="art-heading">' + result[i].matchName + '</a>'
             html += '<span class="art-date sbz">' + result[i].matchState + '</span>'
             html += ' </li>'
-            $("#xjjs").append(html);
+            $("#gjjjs").append(html);
         }
     });
 

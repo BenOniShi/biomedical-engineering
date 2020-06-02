@@ -52,7 +52,6 @@
         <table class="layui-hide" id="articleListTable" lay-filter="articleListTableFilter"></table>
         <script type="text/html" id="articleListBar">
             <div class="layui-btn-group">
-                <a class="layui-btn layui-btn-sm  data-count-edit layui-btn-normal" lay-event="preview">文章预览</a>
                 <a class="layui-btn layui-btn-sm data-count-edit layui-btn-warm" lay-event="edit">文章编辑</a>
                 <a class="layui-btn layui-btn-sm data-count-edit layui-btn-danger" lay-event="delete">文章删除</a>
             </div>
@@ -95,6 +94,7 @@
                     {field: 'articleType', width: 350, title: '文章类型', align: "center"},
                     {field: 'createMan', width: 200, title: '创建人', align: "center"},
                     {field: 'createDate', width: 250, title: '创建时间', align: "center"},
+                    {field: 'articleText', width: 250, title: '创建时间', align: "center", hide: true},
                     {title: '操作', width: 300, templet: '#articleListBar', fixed: "right", align: "center"}
                 ]
             ],
@@ -121,7 +121,7 @@
                     skin: ' layui-layer-molv',
                     maxmin: true, //开启最大化最小化按钮
                     area: ['1400px', '700px'],
-                    content: '/customer/updateCustomerPage',
+                    content: '/article/manager-update',
                 });
             } else if (obj.event === 'delete') {
                 layer.confirm('确定要删除这篇文章吗？', function (index) {
