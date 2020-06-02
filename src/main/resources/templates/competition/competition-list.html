@@ -182,6 +182,68 @@
             $("#xjjs").append(html);
         }
     });
+
+
+    axios({
+        method: 'get',
+        params: {
+            matchType: '省级竞赛',
+        },
+        url: '/competition/queryMatchByType',
+    }).then(response => {
+        var res = response.data;
+        var pageInfo = res.data;
+        var result = pageInfo.list;
+        for (let i = 0; i < result.length; i++) {
+            var html = '<li>';
+            html += '<a href="/competition/queryMatch?matchId=' + result[i].id + ' " class="art-heading">' + result[i].matchName + '</a>'
+            html += '<span class="art-date sbz">' + result[i].matchState + '</span>'
+            html += ' </li>'
+            $("#xjjs").append(html);
+        }
+    });
+
+
+    axios({
+        method: 'get',
+        params: {
+            matchType: '国家级竞赛',
+        },
+        url: '/competition/queryMatchByType',
+    }).then(response => {
+        var res = response.data;
+        var pageInfo = res.data;
+        var result = pageInfo.list;
+        for (let i = 0; i < result.length; i++) {
+            var html = '<li>';
+            html += '<a href="/competition/queryMatch?matchId=' + result[i].id + ' " class="art-heading">' + result[i].matchName + '</a>'
+            html += '<span class="art-date sbz">' + result[i].matchState + '</span>'
+            html += ' </li>'
+            $("#xjjs").append(html);
+        }
+    });
+
+
+    axios({
+        method: 'get',
+        params: {
+            matchType: '国际级竞赛',
+        },
+        url: '/competition/queryMatchByType',
+    }).then(response => {
+        var res = response.data;
+        var pageInfo = res.data;
+        var result = pageInfo.list;
+        for (let i = 0; i < result.length; i++) {
+            var html = '<li>';
+            html += '<a href="/competition/queryMatch?matchId=' + result[i].id + ' " class="art-heading">' + result[i].matchName + '</a>'
+            html += '<span class="art-date sbz">' + result[i].matchState + '</span>'
+            html += ' </li>'
+            $("#xjjs").append(html);
+        }
+    });
+
+
 </script>
 </body>
 </html>

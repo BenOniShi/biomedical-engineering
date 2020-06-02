@@ -51,9 +51,9 @@
         <table class="layui-hide" id="matchListTable" lay-filter="matchListTableFilter"></table>
         <script type="text/html" id="matchListBar">
             <div class="layui-btn-group">
-                <a class="layui-btn layui-btn-sm data-count-edit " lay-event="sign-up">报名</a>
-                <a class="layui-btn layui-btn-sm data-count-edit layui-btn-warm" lay-event="edit">编辑</a>
-                <a class="layui-btn layui-btn-sm data-count-edit layui-btn-danger" lay-event="delete">删除</a>
+                <a class="layui-btn layui-btn-sm data-count-edit " lay-event="sign-up">管理竞赛</a>
+                <a class="layui-btn layui-btn-sm data-count-edit layui-btn-warm" lay-event="edit">编辑竞赛</a>
+                <a class="layui-btn layui-btn-sm data-count-edit layui-btn-danger" lay-event="delete">删除竞赛</a>
             </div>
         </script>
     </div>
@@ -115,7 +115,7 @@
             if (obj.event === 'edit') {
                 layer.open({
                     type: 2,
-                    title: ['文章编辑界面', 'font-size:22px; text-align:center '],
+                    title: ['竞赛编辑界面', 'font-size:22px; text-align:center '],
                     shadeClose: true,
                     shade: false,
                     offset: 'auto',
@@ -148,7 +148,7 @@
             } else if (obj.event === 'sign-up') {
                 layer.open({
                     type: 2,
-                    title: ['报名参赛界面', 'font-size:22px; text-align:center '],
+                    title: ['竞赛管理界面', 'font-size:22px; text-align:center '],
                     shadeClose: true,
                     shade: false,
                     offset: 'auto',

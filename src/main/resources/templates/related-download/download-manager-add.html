@@ -23,11 +23,14 @@
             <form class="layui-form layui-form-pane" action="">
                 <div class="layui-form-item">
                     <label class="layui-form-label">文件标题:</label>
-                    <div class="layui-input-inline">
+                    <div class="layui-input-block">
                         <input type="text" name="articleTitle" autocomplete="off" lay-verify="required"
                                lay-reqtext="请填写文件标题"
                                class="layui-input">
                     </div>
+                </div>
+                <div class="layui-form-item">
+
                     <label class="layui-form-label">创建日期:</label>
                     <div class="layui-input-inline">
                         <input type="text" name="createDate" id="date" autocomplete="off" lay-verify="required"
@@ -102,6 +105,7 @@
             , bindAction: '#test9'
             , done: function (res) {
                 document.getElementById('articleLink').value = res.data;
+                document.getElementById('test9').innerText = "上传成功";
                 layer.msg('上传成功');
             }
         });
