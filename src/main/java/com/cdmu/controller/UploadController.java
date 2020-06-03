@@ -45,11 +45,11 @@ public class UploadController {
         }
         try {
             file.transferTo(dest);
-            return resultInfoUtil.success(ResultConstant.SUCCESS_CODE, ResultConstant.SUCCESS_MSG, filename);
         } catch (IOException e) {
             e.printStackTrace();
+            return resultInfoUtil.success(ResultConstant.FAILED_CODE, ResultConstant.FAILED_MSG);
         }
-        return resultInfoUtil.success(ResultConstant.FAILED_CODE, ResultConstant.FAILED_MSG);
+        return resultInfoUtil.success(ResultConstant.SUCCESS_CODE, ResultConstant.SUCCESS_MSG, filename);
     }
 }
 

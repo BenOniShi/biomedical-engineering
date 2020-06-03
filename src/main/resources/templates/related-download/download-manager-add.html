@@ -104,9 +104,13 @@
             , accept: 'file' //普通文件
             , bindAction: '#test9'
             , done: function (res) {
-                document.getElementById('articleLink').value = res.data;
-                document.getElementById('test9').innerText = "上传成功";
-                layer.msg('上传成功');
+                if (res.code == 200) {
+                    layer.msg('上传成功');
+                    document.getElementById('articleLink').value = res.data;
+                    document.getElementById('test9').innerText = "上传成功,请点击提交文件";
+                } else {
+                    layer.msg("抱歉，目前网络繁忙，上传失败")
+                }
             }
         });
 

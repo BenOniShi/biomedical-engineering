@@ -89,13 +89,11 @@ public class IndexController {
         return resultInfoUtil.success(articleService.queryArticleByType(page, limit, articleType));
     }
 
-    @RequestMapping(value = "queryArticle", method = RequestMethod.GET)
+    @RequestMapping(value = "/queryArticle", method = RequestMethod.GET)
     public ModelAndView queryArticle(Integer articleId) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("article", articleService.queryArticleById(articleId));
         modelAndView.setViewName("article-list/article-list");
         return modelAndView;
     }
-
-
 }
